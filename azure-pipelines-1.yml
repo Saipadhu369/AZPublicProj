@@ -1,0 +1,22 @@
+trigger:
+- main   # Runs pipeline when you push to the main branch
+
+pool:
+  name: 'SelfHostedPool'   # <-- Replace with your agent pool name
+
+steps:
+- script: echo "Hello from my self-hosted agent!"
+  displayName: 'Test Agent Connectivity'
+
+- script: |
+    echo "Simulating a build step..."
+    mkdir output
+    echo "Build successful!" > output/result.txt
+  displayName: 'Build Project'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: 'output'
+    artifactName: 'drop'
+    publishLocation: 'Container'
+  displayName: 'Publish Artifact'
