@@ -2,7 +2,7 @@ trigger:
 - main   # Runs pipeline when you push to the main branch
 
 pool:
-  name: 'SelfHostedPool'   # <-- Replace with your agent pool name
+  name: 'Default'   # <-- Replace with your agent pool name
 
 steps:
 - script: echo "Hello from my self-hosted agent!"
