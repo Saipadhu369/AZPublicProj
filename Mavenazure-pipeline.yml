@@ -10,14 +10,15 @@ steps:
     mavenPomFile: 'pom.xml'
     goals: 'clean install'
     options: '-Dmaven.test.skip=true'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '25.0'   # adjust based on your JDK installed
+    javaHomeOption: 'Path'
+    jdkDirectory: '$(JAVA_HOME)'   # must be set on your agent machine
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     mavenOptions: '-Xmx1024m'
     mavenVersionOption: 'Default'
     mavenAuthenticateFeed: false
     effectivePomSkip: false
+
 
 - task: CopyFiles@2
   inputs:
