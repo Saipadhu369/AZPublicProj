@@ -2,7 +2,7 @@ trigger:
 - main   # or your branch name
 
 pool:
-  name: Default   # replace with your self-hosted pool name
+  name: Default # replace with your self-hosted pool name
 
 steps:
 - task: Maven@3
