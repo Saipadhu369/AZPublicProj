@@ -11,7 +11,7 @@ steps:
     goals: 'clean install'
     options: '-Dmaven.test.skip=true'
     javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.11'   # adjust based on your JDK installed
+    jdkVersionOption: '25.0'   # adjust based on your JDK installed
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     mavenOptions: '-Xmx1024m'
