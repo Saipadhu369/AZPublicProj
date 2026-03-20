@@ -2,18 +2,20 @@ trigger:
 - main
 
 pool:
-  name: Default   # Use your self-hosted agent pool name
+  name: Default   # Replace with your self-hosted agent pool name
 
 steps:
+- checkout: self   # Ensures your repo is cloned onto the agent
+
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
     version: '8.x'
 
-- script: dotnet build --configuration Release
+- script: dotnet build MyApp/MyApp.csproj --configuration Release
   displayName: 'Build project'
 
-- script: dotnet publish -c Release -o $(Build.ArtifactStagingDirectory)
+- script: dotnet publish MyApp/MyApp.csproj -c Release -o $(Build.ArtifactStagingDirectory)
   displayName: 'Publish project'
 
 - task: PublishBuildArtifacts@1
