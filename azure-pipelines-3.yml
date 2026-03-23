@@ -1,0 +1,37 @@
+trigger:
+- main
+
+pool:
+  name: Default   # or your self-hosted agent pool
+
+variables:
+  MAVEN_VERSION: '3.9.14'
+  JAVA_VERSION: '17'
+
+steps:
+# Install Java (JDK 17)
+- task: JavaToolInstaller@0
+  inputs:
+    versionSpec: '$(JAVA_VERSION)'
+    jdkArchitectureOption: 'x64'
+    jdkSourceOption: 'PreInstalled'
+
+# Verify Java installation
+- script: |
+    echo "JAVA_HOME is set to: $env:JAVA_HOME"
+    java -version
+  displayName: 'Check Java version'
+
+# Install Maven
+- task: Maven@3
+  inputs:
+    mavenVersionOption: 'Default'
+    goals: 'clean install'
+    options: '-X'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    javaHomeOption: 'Path'
+    jdkDirectory: '$(JAVA_HOME)'
+    mavenOptions: '-Xmx1024m'
+    mavenSetM2Home: true
+    mavenVersion: '$(MAVEN_VERSION)'
